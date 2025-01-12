@@ -21,8 +21,8 @@ int main(int argc, char const *argv[])
 		scanf("%d",&x);
 		printf("Enter other vertex\n");
 		scanf("%d",&y);
-		mat[x+1][y+1] = 1;
-		mat[y+1][x+1] = 1;
+		mat[x-1][y-1] = 1;
+		mat[y-1][x-1] = 1;
 	}
 
 	printf("Printing matrix\n");
