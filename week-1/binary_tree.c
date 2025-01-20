@@ -2,62 +2,78 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct node{
-	struct node* left;
-	struct node* right;
+typedef struct node
+{
+	struct node *left;
+	struct node *right;
 	int data;
 } Node;
 
-void inorder(Node* root){
-	if(root == NULL) return;
+void inorder(Node *root)
+{
+	if (root == NULL)
+		return;
 	inorder(root->left);
 	printf("%d ", root->data);
 	inorder(root->right);
 }
-void postorder(Node* root){
-	if(root == NULL) return;
+void postorder(Node *root)
+{
+	if (root == NULL)
+		return;
 	postorder(root->left);
 	postorder(root->right);
 	printf("%d ", root->data);
 }
-void preorder(Node* root){
-	if(root == NULL) return;
+void preorder(Node *root)
+{
+	if (root == NULL)
+		return;
 	printf("%d ", root->data);
 	preorder(root->left);
 	preorder(root->right);
 }
-Node* createNode(int data){
-	Node* newNode = (Node*) malloc(sizeof(Node));
+Node *createNode(int data)
+{
+	Node *newNode = (Node *)malloc(sizeof(Node));
 	newNode->data = data;
 	return newNode;
 }
 
-Node* insert(int data, Node* root){
+Node *insert(int data, Node *root)
+{
 	printf("Inserting %d\n", data);
-	Node* newNode = createNode(data);
-	if(root == NULL){
+	Node *newNode = createNode(data);
+	if (root == NULL)
+	{
 		return newNode;
 	}
-	Node* current = root;
-	Node* parent = root;
-	while(current!=NULL){
+	Node *current = root;
+	Node *parent = root;
+	while (current != NULL)
+	{
 		parent = current;
-		if(data == parent->data){
-			printf("Duplicate found (%d)\n",data);
+		if (data == parent->data)
+		{
+			printf("Duplicate found (%d)\n", data);
 			return root;
 		}
-		if(data<parent->data){
+		if (data < parent->data)
+		{
 			current = current->left;
 		}
-		if (data>parent->data){
+		if (data > parent->data)
+		{
 			current = current->right;
 		}
 	}
-	if(data<parent->data){
+	if (data < parent->data)
+	{
 		parent->left = newNode;
 		return root;
 	}
-	else{
+	else
+	{
 		parent->right = newNode;
 		return root;
 	}
@@ -65,7 +81,7 @@ Node* insert(int data, Node* root){
 
 int main(int argc, char const *argv[])
 {
-	Node* root = insert(5, NULL);
+	Node *root = insert(5, NULL);
 	insert(12, root);
 	insert(14, root);
 	insert(14, root);

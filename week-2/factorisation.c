@@ -28,38 +28,28 @@ void addToList(Node *root, int data)
 int findFactors(int a, Node **root)
 {
     int opcount = 0;
-    *root = createNode(0);  
+    *root = createNode(0);
     while (a % 2 == 0)
     {
         addToList(*root, 2);
         a = a / 2;
-        opcount++;  
+        opcount++;
     }
     for (int i = 3; i * i <= a; i += 2)
     {
+        opcount++;
         while (a % i == 0)
         {
             addToList(*root, i);
             a = a / i;
-            opcount++;  
         }
     }
     if (a > 2)
     {
         addToList(*root, a);
-        opcount++;  
+        opcount++;
     }
-    return opcount;  
-}
-
-void printList(Node *root)
-{
-    Node *current = root;
-    while (current)
-    {
-        printf("%d  ", current->data);
-        current = current->next;
-    }
+    return opcount;
 }
 
 int findGCD(int a, int b)
@@ -67,7 +57,6 @@ int findGCD(int a, int b)
     Node *roota = NULL, *rootb = NULL;
     int opcount = 0;
 
-    
     opcount += findFactors(a, &roota);
     opcount += findFactors(b, &rootb);
 
@@ -75,10 +64,9 @@ int findGCD(int a, int b)
     Node *currentb = rootb->next;
     int gcd = 1;
 
-    
     while (currenta && currentb)
     {
-        opcount++;  
+        opcount++;
         if (currenta->data == currentb->data)
         {
             gcd *= currenta->data;
@@ -95,14 +83,20 @@ int findGCD(int a, int b)
         }
     }
 
-    printf("%d\t%d\n", a+b, opcount);
+    printf("%d\t%d\n", a + b, opcount);
     return gcd;
 }
 
 int main(int argc, char const *argv[])
 {
-	int a[] = {1338, 3395, 3601, 5496, 6839, 7638, 10193, 12745, 12952, 12961, 12993, 13198, 15133, 17233, 17618, 17657, 18234, 18253, 18930, 19305};
-	int b[] = {235, 330, 759, 1796, 4340, 4571, 4782, 7619, 8491, 9409, 9718, 10171, 10232, 11834, 12340, 13224, 14773, 15227, 15467, 17261};
+    int a[20], b[20];
+
+    // Generate arrays programmatically
+    for (int i = 0; i < 20; ++i)
+    {
+        a[i] = 1000 + (i * i * 3); // Example formula for array 'a'
+        b[i] = 200 + (i * 165);    // Example formula for array 'b'
+    }
 
     for (int i = 0; i < 20; ++i)
     {
